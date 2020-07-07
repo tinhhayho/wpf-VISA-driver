@@ -1,0 +1,98 @@
+﻿<Window x:Class="usb_hid.DacWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:usb_hid"
+        mc:Ignorable="d"
+        xmlns:uc ="clr-namespace:usb_hid.usecontrolusb"         
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}" 
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Name="Mainwindow"
+        DataContext="{StaticResource DacVM}"
+        Margin="5 5 5 5"
+        Title="MainWindow" Height="500" Width="500">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="auto">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=Mainwindow}"></uc:ControlBarUC>
+        </Grid>
+        <!--main grid-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+            <materialDesign:Card Margin="5">
+                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBox
+                        Text="{Binding DacSelChannel,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        Margin="20 50 20 50"                        
+                        HorizontalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Channel select"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        VerticalAlignment="Center"
+                        />
+                        <TextBox
+                        Text="{Binding DacSelConvert,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        Margin="20 50 20 50"                             
+                        materialDesign:HintAssist.Hint="Value convert"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        VerticalAlignment="Center" />
+                </WrapPanel>
+            </materialDesign:Card>
+                <StackPanel Orientation="Horizontal">
+                <Button   FontSize="30"
+                          Height="auto"
+                           Style="{StaticResource MaterialDesignFlatButton}"
+                           ToolTip="MaterialDesignFlatButton"
+                           Content="UPDATE"
+                           Command="{Binding DacUpdateCommand}">                    
+                </Button>
+                <Button   FontSize="30"
+                          Height="auto"
+                           Style="{StaticResource MaterialDesignFlatButton}"
+                           ToolTip="MaterialDesignFlatButton"
+                           Content="ACCEPT"
+                          Command="{Binding DacSend}">                    
+                </Button>                  
+                    
+                </StackPanel>
+
+            </StackPanel>
+
+            <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
+
+                <ListView  ItemsSource="{Binding ItemDac}" SelectedItem="{Binding SelectedItemsDac,Mode=OneWayToSource}">
+                    <ListView.View>
+                        <GridView >
+                            <GridViewColumn  DisplayMemberBinding="{Binding DacChannel}"
+                                             Header="Channel"/>
+                            <GridViewColumn  DisplayMemberBinding="{Binding DacConvert}"
+                                             Header="Value" />
+                            <GridViewColumn  DisplayMemberBinding="{Binding Des}"
+                                             Header="Description" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </materialDesign:Card>
+
+        </Grid>
+
+
+    </Grid>
+</Window>

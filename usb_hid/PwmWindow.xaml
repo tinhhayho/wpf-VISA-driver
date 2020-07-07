@@ -1,0 +1,234 @@
+﻿<Window x:Class="usb_hid.PwmWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:usb_hid"
+        mc:Ignorable="d"
+        xmlns:uc ="clr-namespace:usb_hid.usecontrolusb"         
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}" 
+        DataContext="{StaticResource PwmVM}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Name="Mainwindow"
+        Margin="5 5 5 5"
+        Title="PWM Window" Height="500" Width="680">        
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="auto">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=Mainwindow}"></uc:ControlBarUC>
+        </Grid>
+        <!--main grid-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--channel 1-->
+            <materialDesign:Card Grid.Row="0">
+            <Grid Grid.Row="0"  
+                  VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"  ></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!-- channel select-->
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            Grid.Column="0"                            
+                            >
+                    <TextBlock Text="CHANNEL 1"
+                               Margin="5 20 5 20"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Width="200"
+                               Style="{StaticResource MaterialDesignHeadline4TextBlock}">                        
+                    </TextBlock>
+                    
+                    <Button    Style="{DynamicResource MaterialDesignRaisedButton}"
+                               Command="{Binding Write1Command}"
+                               materialDesign:ShadowAssist.ShadowDepth="Depth5"
+                               Content="WRITE"
+                               Width="200"
+                               VerticalAlignment="Center">
+                        
+                    </Button>
+                </StackPanel>
+
+                <StackPanel  Grid.Column="1" Orientation="Horizontal">
+                    <!--pwm-->
+                    <StackPanel Orientation="Vertical" Margin=" 2 20 2 20">     
+                        <!--chon mode PWM hay PTO-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    >                           
+                            <TextBlock Text="PWM"
+                                       Margin="20 2 20 2">                                
+                            </TextBlock>
+                            <ToggleButton  Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+                                       ToolTip="MaterialDesignSwitchDarkToggleButton"
+                                       IsChecked="False" 
+                                       Margin="20 2 20 2"
+                                       />
+
+                            <TextBlock Text="PTO"
+                                       Margin="20 2 20 2">
+                            </TextBlock>
+                            <ToggleButton  Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+                                       ToolTip="MaterialDesignSwitchDarkToggleButton"
+                                       IsChecked="False" 
+                                       Margin="20 2 20 2"
+                                       />
+                        </StackPanel>
+                        
+                        <!-- set tan so va duty cycle-->
+                            <StackPanel  Orientation="Horizontal"
+                                     Margin="0 16 0 0">
+                                <TextBox  materialDesign:HintAssist.Hint="Max Frequency"
+                                          Margin="5 5 10 0"
+                                          x:Name="sliderMaxH1"                                            
+                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          VerticalAlignment="Center" />
+                                <Slider    Minimum="0"
+                                       Maximum="{Binding Text, ElementName=sliderMaxH1}"
+                                       Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                       ToolTip="MaterialDesignDiscreteSlider"
+                                       Value="{Binding NormalFrequency1,Mode=OneWayToSource}"
+                                       Width="280" />
+                            </StackPanel>
+                            <StackPanel  Orientation="Horizontal"
+                                     Margin="0 16 0 0">
+                            <TextBox  materialDesign:HintAssist.Hint="Max Duty Cycle"
+                                          Margin="5 5 10 0"
+                                          x:Name="sliderMaxH2"                                            
+                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          VerticalAlignment="Center" />
+                            <Slider    Minimum="0"
+                                       Maximum="{Binding Text, ElementName=sliderMaxH2}"
+                                       Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                       ToolTip="MaterialDesignDiscreteSlider"
+                                       Value="{Binding Duty1,Mode=OneWayToSource}"
+                                       Width="280" />
+                        </StackPanel>                       
+                    </StackPanel>                                  
+                </StackPanel>
+
+            </Grid>
+            </materialDesign:Card>
+            
+            <Separator      Grid.Row="1"
+                            Style="{StaticResource MaterialDesignLightSeparator}" />
+            
+            
+            
+            <!--channel 2-->
+            <materialDesign:Card Grid.Row="2" >
+            <Grid Grid.Row="2"  
+                  VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"  ></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!-- channel select-->
+                <StackPanel Orientation="Vertical"
+                            VerticalAlignment="Center"
+                            Grid.Column="0"                            
+                            >
+                    <TextBlock Text="CHANNEL 2"
+                               Margin="5 20 5 20"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Width="200"
+                               Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                    </TextBlock>
+
+                    <Button    Style="{DynamicResource MaterialDesignRaisedButton}"
+                               Command="{Binding Write2Command}"
+                               materialDesign:ShadowAssist.ShadowDepth="Depth5"
+                               Content="WRITE"
+                               Width="200"
+                               VerticalAlignment="Center">
+
+                    </Button>
+                </StackPanel>
+
+                <StackPanel  Grid.Column="1" Orientation="Vertical">
+                    <!--pwm-->
+                    <StackPanel Orientation="Vertical" Margin=" 2 20 2 20">
+                        <!--chon mode PWM hay PTO-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                    >
+                            <TextBlock Text="PWM"
+                                       Margin="20 2 20 2">
+                            </TextBlock>
+                            <ToggleButton  Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+                                       ToolTip="MaterialDesignSwitchDarkToggleButton"
+                                       IsChecked="False" 
+                                       Margin="20 2 20 2"
+                                       />
+
+                            <TextBlock Text="PTO"
+                                       Margin="20 2 20 2">
+                            </TextBlock>
+                            <ToggleButton  Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+                                       ToolTip="MaterialDesignSwitchDarkToggleButton"
+                                       IsChecked="False" 
+                                       Margin="20 2 20 2"
+                                       />
+
+                        </StackPanel>
+
+                        <!-- set tan so va duty cycle-->
+
+                    </StackPanel>
+                        <StackPanel  Orientation="Horizontal"
+                                     Margin="0 16 0 0">
+                            <TextBox  materialDesign:HintAssist.Hint="Max Frequency"
+                                          Margin="5 5 10 0"
+                                          x:Name="sliderMaxH3"
+                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          VerticalAlignment="Center" />
+                            <Slider    Minimum="0"
+                                       Maximum="{Binding Text, ElementName=sliderMaxH3}"
+                                       Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                       ToolTip="MaterialDesignDiscreteSlider"
+                                       Value="{Binding NormalFrequency2,Mode=OneWayToSource}"
+                                       Width="280" />
+                        </StackPanel>
+
+
+                        <StackPanel  Orientation="Horizontal"
+                                     Margin="0 16 0 20">
+                            <TextBox  materialDesign:HintAssist.Hint="Max Duty Cycle"
+                                          Margin="5 5 10 0"
+                                          x:Name="sliderMaxH4"
+                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                          VerticalAlignment="Center" />
+                            <Slider    Minimum="0"
+                                       Maximum="{Binding Text, ElementName=sliderMaxH4}"
+                                       Style="{StaticResource MaterialDesignDiscreteSlider}"
+                                       ToolTip="MaterialDesignDiscreteSlider"
+                                       Value="{Binding Duty2,Mode=OneWayToSource}"
+                                       Width="280" />
+                        </StackPanel>
+
+
+
+                    </StackPanel>
+
+            </Grid>
+            </materialDesign:Card>
+        </Grid>        
+    </Grid>
+</Window>

@@ -1,0 +1,382 @@
+﻿<Window x:Class="usb_hid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"       
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:usb_hid"
+        xmlns:uc ="clr-namespace:usb_hid.usecontrolusb"        
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}" 
+        DataContext="{StaticResource MainVM}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Name="Mainwindow"
+        Margin="5 5 5 5"
+        Title="MainWindow" Height="500" Width="830">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowsCommand}"
+                                   CommandParameter="{Binding ElementName=Mainwindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="auto">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=Mainwindow}"></uc:ControlBarUC>
+        </Grid>
+        <!--main grid-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+         <!--menu grid-->
+            <Grid Grid.Row="0" Height="110" Margin="5 5 5 5"  VerticalAlignment="Top" >
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Stretch"
+                            Background="Transparent" Orientation="Horizontal" >
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin" Value="2 5 2 5"></Setter>
+                            <Setter Property="Width" Value="200"></Setter>
+                            <Setter Property="Height" Value="100"></Setter>
+                            <Setter Property="Background" Value="LightCyan"></Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button  Command="{Binding UnitCommand}"      
+                        ToolTip="window adc">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="ADC"
+                                           Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <materialDesign:PackIcon   Kind="ArrowUpBoldBox" 
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                    <Button  Command="{Binding DACWindowCommand}"      
+                        ToolTip="window dac">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="DAC"
+                                           Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                                    
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <materialDesign:PackIcon   Kind="ArrowBottomBoldBox" 
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                    <Button   Command="{Binding DiDoWindowCommand}"   
+                        ToolTip="window di do">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="DI/DO"
+                                           Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                                    
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <materialDesign:PackIcon   Kind="CounterclockwiseArrows"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                    <Button   Command="{Binding PwmWindowCommand}"   
+                        ToolTip="window pwm">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="PWM"
+                                           Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+                                    
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <materialDesign:PackIcon   Kind="PlayArrow" 
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            
+            <!--connect grid-->
+            <Grid Grid.Row="1" VerticalAlignment="Top">
+                <!--connect address-->
+                <Grid  VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>                        
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <!-- checkbox style same as toggle button Command="{Binding ConfigWindow}" -->
+                        <Button     Style="{StaticResource MaterialDesignRaisedAccentButton}" 
+                                    Width="200" 
+                                    Height="50"
+                                    Command="{Binding ConfigWindow}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                            CONFIGURE CONNECT
+                        </Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox       
+                            Text="{Binding DeviceName}"
+                            materialDesign:HintAssist.Hint="Devide connect"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            VerticalAlignment="Center" />
+                    </Grid>                    
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="2" VerticalAlignment="Top">
+                <!--introduce-->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <!--Trung Tinh-->
+                    <Grid Grid.Column="0">
+                        <materialDesign:Card 
+                                         Background="#03a9f4"
+                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                         Padding="2 2 2 2"
+                                         Width="250">
+                            <Grid Background="#03a9f4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition      Height="Auto" />
+                                    <RowDefinition      Height="Auto" />
+                                    <RowDefinition      Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock    Grid.Row="0"
+                                          Margin="16 16 16 4"
+                                          Text="Nguyễn Trung Tính"
+                                          Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                                </TextBlock>
+                                <Separator    Grid.Row="1"
+                                          Style="{StaticResource MaterialDesignLightSeparator}" />
+                                <StackPanel Grid.Row="2"
+                                            Orientation="Vertical">
+                                    <Grid>
+                                        <TextBlock    Grid.Row="2"
+                                          Margin="16 0 16 8"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center" 
+                                          Text="1713522"                                          
+                                          Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                                        </TextBlock>
+                                        <materialDesign:PackIcon HorizontalAlignment="Right"                                                                 
+                                                                 Margin="0 0  20 15"
+                                            Kind="PersonBadge" Width="30" Height="30" />
+                                    </Grid>
+                                    <StackPanel   Grid.Row="2"
+                                                  Width="auto"
+                                          Orientation="Horizontal"
+                                          Margin="16 0 16 8"
+                                          HorizontalAlignment="Right">
+                                        <TextBlock                                              
+                                          Grid.Row="2"
+                                          Margin="16 0 60 0"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"  
+                                          Style="{StaticResource MaterialDesignBody2TextBlock}">
+                                          <Hyperlink  Command="{Binding IntroTrungTinhCommand}">                                              
+                                            GitHub
+                                          </Hyperlink>
+                                        </TextBlock>
+                                        <Button   HorizontalAlignment="Right"
+                                          Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                          Width="30"
+                                          Margin="0 0 5 0"
+                                          Padding="2 0 0 0"
+                                          materialDesign:RippleAssist.IsCentered="True">
+                                            <materialDesign:PackIcon     Kind="MicrosoftGithub" 
+                                                                         Width="30"
+                                                                         Height="30"   />
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+
+                    </Grid>
+
+                    <!--Phat Trien-->
+                    <Grid Grid.Column="1">
+                        <materialDesign:Card 
+                                         Background="#03a9f4"
+                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                         Padding="2 2 2 2"
+                                         Width="250">
+                            <Grid Background="#03a9f4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition      Height="Auto" />
+                                    <RowDefinition      Height="Auto" />
+                                    <RowDefinition      Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock    Grid.Row="0"
+                                              HorizontalAlignment="Center"
+                                          Margin="16 16 16 4"
+                                          Text="Thái Phát Triển"
+                                          Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                                </TextBlock>
+                                <Separator    Grid.Row="1"
+                                          Style="{StaticResource MaterialDesignLightSeparator}" />
+                                <StackPanel Grid.Row="2"
+                                            Orientation="Vertical">
+                                    <Grid>
+                                        <TextBlock    Grid.Row="2"
+                                          Margin="16 0 16 8"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center" 
+                                          Text="1710345"                                          
+                                          Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                                        </TextBlock>
+                                        <materialDesign:PackIcon HorizontalAlignment="Right"                                                                 
+                                                                 Margin="0 0  20 15"
+                                            Kind="PersonBadge" Width="30" Height="30" />
+                                    </Grid>
+                                    <StackPanel   Grid.Row="2"
+                                                  Width="auto"
+                                          Orientation="Horizontal"
+                                          Margin="16 0 16 8"
+                                          HorizontalAlignment="Right">
+                                        <TextBlock                                              
+                                          Grid.Row="2"
+                                          Margin="16 0 60 0"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"  
+                                          Style="{StaticResource MaterialDesignBody2TextBlock}">
+                                          <Hyperlink  Command="{Binding IntroTrungTinhCommand}">                                              
+                                            GitHub
+                                          </Hyperlink>
+                                        </TextBlock>
+                                        <Button   HorizontalAlignment="Right"
+                                          Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                          Width="30"
+                                          Margin="0 0 5 0"
+                                          Padding="2 0 0 0"
+                                          materialDesign:RippleAssist.IsCentered="True">
+                                            <materialDesign:PackIcon     Kind="MicrosoftGithub" 
+                                                                         Width="30"
+                                                                         Height="30"   />
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+
+                    </Grid>
+
+                    <!--Long Do-->
+                    <Grid Grid.Column="2">
+                        <materialDesign:Card                             
+                                         Background="#03a9f4"
+                                         Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"
+                                         Padding="2 2 2 2"
+                                         Width="250">
+                            <Grid Background="#03a9f4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition      Height="Auto" />
+                                    <RowDefinition      Height="Auto" />
+                                    <RowDefinition      Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock    Grid.Row="0"
+                                          Margin="16 16 16 4"
+                                              HorizontalAlignment="Center"
+                                          Text="Đỗ Vũ Gia Long"
+                                          Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                                </TextBlock>
+                                <Separator    Grid.Row="1"
+                                          Style="{StaticResource MaterialDesignLightSeparator}" />
+                                <StackPanel Grid.Row="2"
+                                            Orientation="Vertical">
+                                    <Grid>
+                                        <TextBlock    Grid.Row="2"
+                                          Margin="16 0 16 8"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center" 
+                                          Text="1710174"                                          
+                                          Style="{StaticResource MaterialDesignHeadline5TextBlock}">
+                                        </TextBlock>
+                                        <materialDesign:PackIcon HorizontalAlignment="Right"                                                                 
+                                                                 Margin="0 0  20 15"
+                                            Kind="PersonBadge" Width="30" Height="30" />
+                                    </Grid>
+                                    <StackPanel   Grid.Row="2"
+                                                  Width="auto"
+                                          Orientation="Horizontal"
+                                          Margin="16 0 16 8"
+                                          HorizontalAlignment="Right">
+                                        <TextBlock                                              
+                                          Grid.Row="2"
+                                          Margin="16 0 60 0"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"  
+                                          Style="{StaticResource MaterialDesignBody2TextBlock}">
+                                          <Hyperlink  Command="{Binding IntroTrungTinhCommand}">                                              
+                                            GitHub
+                                          </Hyperlink>
+                                        </TextBlock>
+                                        <Button   HorizontalAlignment="Right"
+                                          Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                          Width="30"
+                                          Margin="0 0 5 0"
+                                          Padding="2 0 0 0"
+                                          materialDesign:RippleAssist.IsCentered="True">
+                                            <materialDesign:PackIcon     Kind="MicrosoftGithub" 
+                                                                         Width="30"
+                                                                         Height="30"   />
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </materialDesign:Card>
+
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>     
+
+        
+    </Grid>
+</Window>
