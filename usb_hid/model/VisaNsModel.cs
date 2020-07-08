@@ -153,30 +153,30 @@ namespace usb_hid.model
                  * */
                 byte[] data = e.Data;
                 // kiem ra tong so byte nhan co du khong
-                if (data[numbercheckstartbyte + numberdata + 1] != data.Length)
-                {
-                    return;
-                }
+                //if (data[numbercheckstartbyte + numberdata + 1] != data.Length)
+                //{
+                //    return;
+                //}
 
-                // kiểm tra header có đúng không
-                for (int i = 0; i < numbercheckstartbyte; i++)
-                {
-                    if (data[i] != checkstartbyte[i])
-                    {
-                        return;
-                    }
-                }
+                //// kiểm tra header có đúng không
+                //for (int i = 0; i < numbercheckstartbyte; i++)
+                //{
+                //    if (data[i] != checkstartbyte[i])
+                //    {
+                //        return;
+                //    }
+                //}
 
-                // kiểm tra check sum có đúng không
-                int checksum = 0;
-                for (int i = numbercheckstartbyte; i < numbercheckstartbyte + numberdata; i++)
-                {
-                    checksum += data[i];
-                }
-                if (checksum != data[numberbyteofframe - 1])
-                {
-                    return;
-                }
+                //// kiểm tra check sum có đúng không
+                //int checksum = 0;
+                //for (int i = numbercheckstartbyte; i < numbercheckstartbyte + numberdata; i++)
+                //{
+                //    checksum += data[i];
+                //}
+                //if (checksum != data[numberbyteofframe - 1])
+                //{
+                //    return;
+                //}
                 // kiểm tra thành công
                 if (((data[numbercheckstartbyte + 1] >> 0) & (0x01)) == 1) {  dataDiDo.Di0 = Brushes.Red; }
                 else { dataDiDo.Di0 = Brushes.White; }
@@ -195,16 +195,16 @@ namespace usb_hid.model
                 if (((data[numbercheckstartbyte + 1] >> 7) & (0x01)) == 1) { dataDiDo.Di7 = Brushes.Red; }
                 else { dataDiDo.Di7 = Brushes.White; }
 
-                dataAdc0.AdcValue = BitConverter.ToInt32(new byte[] { data[18], data[19] }, 0);
+                dataAdc0.AdcValue = BitConverter.ToInt16(new byte[] { data[18], data[19] }, 0);
                 dataAdc0.AdcConvert = (double)dataAdc0.AdcValue * 3.3 / 4095.0;
 
-                dataAdc1.AdcValue = BitConverter.ToInt32(new byte[] { data[20], data[21] }, 0);
+                dataAdc1.AdcValue = BitConverter.ToInt16(new byte[] { data[20], data[21] }, 0);
                 dataAdc1.AdcConvert = (double)dataAdc1.AdcValue * 3.3 / 4095.0;
 
-                dataAdc2.AdcValue = BitConverter.ToInt32(new byte[] { data[22], data[23] }, 0);
+                dataAdc2.AdcValue = BitConverter.ToInt16(new byte[] { data[22], data[23] }, 0);
                 dataAdc2.AdcConvert = (double)dataAdc2.AdcValue * 3.3 / 4095.0;
 
-                dataAdc3.AdcValue = BitConverter.ToInt32(new byte[] { data[24], data[25] }, 0);
+                dataAdc3.AdcValue = BitConverter.ToInt16(new byte[] { data[24], data[25] }, 0);
                 dataAdc3.AdcConvert = (double)dataAdc3.AdcValue * 3.3 / 4095.0;
 
                 //VisaNsModel.deviceNameDataBase = data[0].ToString();
