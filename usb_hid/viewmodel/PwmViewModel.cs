@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using usb_hid.model;
 
@@ -33,6 +34,15 @@ namespace usb_hid.viewmodel
                 {
                     VisaNsModel.dataPwm0.NormalFrequency = Convert.ToUInt16(NormalFrequency1);
                     VisaNsModel.dataPwm0.Duty = Convert.ToUInt16(Duty1);
+                    try
+                    {
+                        VisaNsModel.WriteUsb();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message);
+                    }
 
                 });
             Write2Command = new RelayCommand<object>
@@ -45,6 +55,15 @@ namespace usb_hid.viewmodel
                 {
                     VisaNsModel.dataPwm1.NormalFrequency = Convert.ToUInt16(NormalFrequency2);
                     VisaNsModel.dataPwm1.Duty = Convert.ToUInt16(Duty2);
+                    try
+                    {
+                        VisaNsModel.WriteUsb();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message);
+                    }
                 });
         }
 

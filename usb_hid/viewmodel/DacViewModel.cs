@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using usb_hid.model;
@@ -46,6 +47,7 @@ namespace usb_hid.viewmodel
             set {_dacSelConvert= value;OnPropertyChanged(); } 
         }
         public ICommand DacUpdateCommand { get; set; }
+        public ICommand DacSend { get; set; }
 
         int _channelUpdate;
         double _valueUpdate;
@@ -90,6 +92,18 @@ namespace usb_hid.viewmodel
                         ItemDac[_channelUpdate].Des = "enable";
                         ItemDac[_channelUpdate].DacConvert = Convert.ToSingle(_valueUpdate);
                     });
+
+            DacSend = new RelayCommand<object>((p) => { return true; },
+                (p) =>  {                    
+                    try
+                    {
+                        VisaNsModel.WriteUsb();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                });
 
         }
         // chua la gi o day

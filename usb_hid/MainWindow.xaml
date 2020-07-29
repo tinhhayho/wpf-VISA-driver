@@ -286,7 +286,7 @@
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Left"  
                                           Style="{StaticResource MaterialDesignBody2TextBlock}">
-                                          <Hyperlink  Command="{Binding IntroTrungTinhCommand}">                                              
+                                          <Hyperlink  Command="{Binding IntroPhatTrienCommand}">                                              
                                             GitHub
                                           </Hyperlink>
                                         </TextBlock>
@@ -353,7 +353,7 @@
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Left"  
                                           Style="{StaticResource MaterialDesignBody2TextBlock}">
-                                          <Hyperlink  Command="{Binding IntroTrungTinhCommand}">                                              
+                                          <Hyperlink  Command="{Binding IntroLongDoCommand}">                                              
                                             GitHub
                                           </Hyperlink>
                                         </TextBlock>

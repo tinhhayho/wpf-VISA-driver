@@ -42,7 +42,6 @@ namespace usb_hid.viewmodel
                     if (ResourceName != null)
                     {
                         ResourceName.Clear();
-
                     }
                     FindResources();
 
@@ -70,22 +69,17 @@ namespace usb_hid.viewmodel
                         VisaNsModel.mySession.DisposeIfNotNull();                        
                         // tao mo connect moi
                         ResourceManager manager = new ResourceManager();
-                        TextBox pp = p as TextBox;
-                        
+                        TextBox pp = p as TextBox;                        
                         VisaNsModel.mySession = manager.Open(pp.Text) as UsbRaw;
                         VisaNsModel.mySession.Interrupt += VisaNsModel.EN_USBInterrupt;
-                        VisaNsModel.deviceNameDataBase = VisaNsModel.mySession.ModelName;
-                        //mySession.EnableEvent(EventType.UsbInterrupt);
+                        VisaNsModel.deviceNameDataBase = VisaNsModel.mySession.ModelName;                       
                         Window cofwindow = Window.GetWindow(p);
                         cofwindow.Close();
                     }
                     catch (Exception ex)
                     {
-
                         MessageBox.Show(ex.Message);
                     }
-
-
                 });
 
             disconnectCommand = new RelayCommand<object>
@@ -100,12 +94,10 @@ namespace usb_hid.viewmodel
                 },
                 (p) =>
                 {
+                    VisaNsModel.mySession.Interrupt -= VisaNsModel.EN_USBInterrupt;
                     VisaNsModel.mySession.DisposeIfNotNull();
                     VisaNsModel.deviceNameDataBase = "non-device connect";
                 });
-
-
-
         }
 
 
@@ -121,7 +113,7 @@ namespace usb_hid.viewmodel
                 {
                     List<string> ResourceNameTemp = new List<string>() { "1" };
                     IEnumerable<string> resources = rm.Find(filter);
-                    foreach (string s in resources)                    {
+                    foreach (string s in resources){
                         
                         ParseResult parseResult = rm.Parse(s);
                         AddReSource(s, parseResult.InterfaceType,ref ResourceNameTemp );

@@ -13,9 +13,6 @@ namespace usb_hid.viewmodel
 {
     public class DiDoViewModel:BaseViewModel
     {
-
-
-
         private Brush _Di0;
         public Brush Di0 { get => _Di0; set { _Di0 = value; } }
         private Brush _Di1;
@@ -32,8 +29,6 @@ namespace usb_hid.viewmodel
         public Brush Di6 { get => _Di6; set { _Di6 = value; } }
         private Brush _Di7;
         public Brush Di7 { get => _Di7; set { _Di7 = value; } }
-
-
 
 
         public ICommand Do0Command { get; set; }
@@ -60,8 +55,6 @@ namespace usb_hid.viewmodel
             // delegate
             VisaNsModel.dataDiDo.ValueChanged += DIDO_changed;
             // xu ly cac command
-
-
 
             // mới viết cho 1 nút 
             Do0Command = new RelayCommand<ToggleButton>((p) => { return  true; },
@@ -241,7 +234,6 @@ namespace usb_hid.viewmodel
                     }
                     catch (Exception ex)
                     {
-
                         MessageBox.Show(ex.Message);
                     }
                 });
@@ -261,7 +253,6 @@ namespace usb_hid.viewmodel
                             VisaNsModel.dataDiDo._Do7 = false;
                         }
                     }
-                    VisaNsModel.WriteUsb();
                     try
                     {
                         VisaNsModel.WriteUsb();
@@ -272,8 +263,6 @@ namespace usb_hid.viewmodel
                         MessageBox.Show(ex.Message);
                     }
                 });
-
-
         }
 
         void DIDO_changed(object sender, EventArgs e)

@@ -104,7 +104,7 @@ namespace usb_hid.viewmodel
             IntroPhatTrienCommand = new RelayCommand<object>((p) => { return true; },
                 (p) =>
                 {
-                    Process.Start("https://github.com/tinhhayho");
+                    Process.Start("https://github.com/tapati0127");
                 });
             IntroLongDoCommand = new RelayCommand<object>((p) => { return true; },
                 (p) =>
