@@ -67,7 +67,7 @@
                                        Command="{Binding Do0Command}"
                                        CommandParameter="{Binding ElementName=Do0}"
                                        Style="{StaticResource MaterialDesignActionToggleButton}"
-                                       ToolTip="MaterialDesignActionToggleButton"
+                                       ToolTip="Bật / Tắt DO0"
                                        materialDesign:ShadowAssist.ShadowDepth="Depth3" />
                         <!-- nut 2-->
                         <ToggleButton  Content="1" 
@@ -76,7 +76,7 @@
                                        Command="{Binding Do1Command}"
                                        CommandParameter="{Binding ElementName=Do1}"
                                        Style="{StaticResource MaterialDesignActionToggleButton}"
-                                       ToolTip="MaterialDesignActionToggleButton"
+                                       ToolTip="Bật / Tắt DO1"
                                        materialDesign:ShadowAssist.ShadowDepth="Depth3" />
                         <!-- nut 3-->
                         <ToggleButton  Content="2" 
@@ -85,7 +85,7 @@
                                        Command="{Binding Do2Command}"
                                        CommandParameter="{Binding ElementName=Do2}"
                                        Style="{StaticResource MaterialDesignActionToggleButton}"
-                                       ToolTip="MaterialDesignActionToggleButton"
+                                       ToolTip="Bật / Tắt DO2"
                                        materialDesign:ShadowAssist.ShadowDepth="Depth3" />
                         <!-- nut 4-->
                         <ToggleButton  Content="3"   
@@ -94,7 +94,7 @@
                                        Command="{Binding Do3Command}"
                                        CommandParameter="{Binding ElementName=Do3}"
                                        Style="{StaticResource MaterialDesignActionToggleButton}"
-                                       ToolTip="MaterialDesignActionToggleButton"
+                                       ToolTip="Bật / Tắt DO3"
                                        materialDesign:ShadowAssist.ShadowDepth="Depth3" />
                         <!-- nut 5-->
                         <ToggleButton  Content="4"   
@@ -103,7 +103,7 @@
                                        Command="{Binding Do4Command}"
                                        CommandParameter="{Binding ElementName=Do4}"
                                        Style="{StaticResource MaterialDesignActionToggleButton}"
-                                       ToolTip="MaterialDesignActionToggleButton"
+                                       ToolTip="Bật / Tắt DO4"
                                        materialDesign:ShadowAssist.ShadowDepth="Depth3" />
                         <!-- nut 6-->
                         <ToggleButton  Content="5"  
@@ -112,7 +112,7 @@
                                        Command="{Binding Do5Command}"
                                        CommandParameter="{Binding ElementName=Do5}"
                                        Style="{StaticResource MaterialDesignActionToggleButton}"
-                                       ToolTip="MaterialDesignActionToggleButton"
+                                       ToolTip="Bật / Tắt DO5"
                                        materialDesign:ShadowAssist.ShadowDepth="Depth3" />
                         <!-- nut 7-->                        
                         <ToggleButton  Content="6" 
@@ -121,7 +121,7 @@
                                        Command="{Binding Do6Command}"
                                        CommandParameter="{Binding ElementName=Do6}"
                                        Style="{StaticResource MaterialDesignActionToggleButton}"
-                                       ToolTip="MaterialDesignActionToggleButton"
+                                       ToolTip="Bật / Tắt DO6"
                                        materialDesign:ShadowAssist.ShadowDepth="Depth3" />
                         <!-- nut 8-->                        
                         <ToggleButton  Content="7"    
@@ -130,7 +130,7 @@
                                        Command="{Binding Do7Command}"
                                        CommandParameter="{Binding ElementName=Do7}"
                                        Style="{StaticResource MaterialDesignActionToggleButton}"
-                                       ToolTip="MaterialDesignActionToggleButton"
+                                       ToolTip="Bật / Tắt DO7"
                                        materialDesign:ShadowAssist.ShadowDepth="Depth3" />
 
                     </WrapPanel>     

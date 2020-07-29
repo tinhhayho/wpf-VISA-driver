@@ -17,12 +17,8 @@ namespace usb_hid.viewmodel
 
     class ConfigViewModel : BaseViewModel 
     {
-
-
         // onpropertychaned dung de thong bao gia tri da thay doi
         // de command hoat dong
-
-
         private readonly string filter = "USB?*";
 
         private List<string> _ResourceName;

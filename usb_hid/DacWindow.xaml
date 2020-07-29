@@ -59,14 +59,14 @@
                 <Button   FontSize="30"
                           Height="auto"
                            Style="{StaticResource MaterialDesignFlatButton}"
-                           ToolTip="MaterialDesignFlatButton"
+                           ToolTip="Cập nhật giá trị DAC nhưng chưa xuất ra ở card USB"
                            Content="UPDATE"
                            Command="{Binding DacUpdateCommand}">                    
                 </Button>
                 <Button   FontSize="30"
                           Height="auto"
                            Style="{StaticResource MaterialDesignFlatButton}"
-                           ToolTip="MaterialDesignFlatButton"
+                           ToolTip="Xuất giá trị analog tương ứng ở card USB"
                            Content="ACCEPT"
                           Command="{Binding DacSend}">                    
                 </Button>                  

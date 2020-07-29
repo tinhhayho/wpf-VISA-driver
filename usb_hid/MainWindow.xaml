@@ -152,7 +152,7 @@
                                     Width="200" 
                                     Height="50"
                                     Command="{Binding ConfigWindow}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton">
+                                    ToolTip="Thiết lập kết nối">
                             CONFIGURE CONNECT
                         </Button>
                     </Grid>
